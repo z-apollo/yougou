@@ -1,9 +1,5 @@
-<view class="search">
-  <view class="search-input">
-    <icon type="search" size="16"></icon>
-    搜素
-  </view>
-</view>
+<!-- 导入搜索组件 -->
+<search/>
 
 <!-- indicator-dots：是否显示面板指示点 -->
 <swiper indicator-dots autoplay interval="2000" duration="500">
