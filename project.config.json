@@ -48,7 +48,8 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "aaa",
+					"name": "pages/category/index",
+					"pathName": "pages/category/index",
 					"scene": null
 				}
 			]
