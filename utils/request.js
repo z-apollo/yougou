@@ -12,7 +12,7 @@ const request = (config) => {
 
   // 参数中必须包含url
   if (!config.url) {
-    console.error("URL不能为空 ");
+    console.error("URL不能为空! ");
     return;
   }
   //判断url前面是否带有http，如果有就不加上基准路径，反之就加上
