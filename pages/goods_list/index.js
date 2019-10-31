@@ -9,7 +9,9 @@ Page({
     //是否有更多
     hasMore: true,
     //当前的页数
-    pagenum: 1
+    pagenum: 1,
+    //函数节流，判断上次请求是否成功，成功之后再允许请求下一页数据
+    loading: false
   },
 
   onLoad: function(options){
@@ -26,6 +28,15 @@ Page({
 
   //请求列表数据（封装）
   getList(){
+    //正在加载
+    if(this.data.loading === true){
+      return;
+    }
+    //开始加载数据
+    this.setData({
+      loading: true
+    })
+
     request({
       url: "/api/public/v1/goods/search",
       data:{
@@ -49,7 +60,11 @@ Page({
       })
       //合并数组
       this.setData({
-        goods: [...this.data.goods, ...newGoods]
+        goods: [...this.data.goods, ...newGoods],
+        //页数加1
+        pagenum: this.data.pagenum + 1,
+        //请求成功之后把loading改为false
+        loading: false
       })
     })
   },
