@@ -4,7 +4,12 @@ Page({
   data: {
     query: "",
     //商品列表，接口请求回来的
-    goods:[]
+    goods:[],
+
+    //是否有更多
+    hasMore: true,
+    //当前的页数
+    pagenum: 1
   },
 
   onLoad: function(options){
@@ -16,31 +21,42 @@ Page({
     })
 
     //请求列表数据
+    this.getList();
+  },
+
+  //请求列表数据（封装）
+  getList(){
     request({
       url: "/api/public/v1/goods/search",
-      data: {
-        query,
-        pagenum: 1,
+      data:{
+        query: this.data.query,
+        pagenum: this.data.pagenum,
         pagesize: 10
       }
     }).then(res =>{
       //goods是商品列表
       const {goods} = res.data.message
-
       //循环给每个商品价格保留两位小数点
-      const newGoods = goods.map(v =>{
+      const newGoods = goods.map(v => {
         v.goods_price = Number(v.goods_price).toFixed(2)
         return v;
       })
 
       this.setData({
-        goods:newGoods
+        goods: [...this.data.goods, ...newGoods]
       })
     })
+  },
 
-
+  //触底事件
+  onReachBottom(){
+    //请求下一页数据
+    this.setData({
+      pagenum: this.data.pagenum + 1
+    })
+    
+    this.getList()
   }
-
 
 
 })
