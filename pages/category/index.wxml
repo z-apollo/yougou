@@ -3,6 +3,7 @@
 
 <view class="container">
   <view class="menu">
+    <!-- 第一次循环遍历 -->
     <view 
     class="menu-item {{current === index ? 'active' : ''}}"
     wx:for="{{list}}" 
@@ -14,12 +15,14 @@
   </view>
   <view class="content">
     <!-- 标题 -->
+    <!-- 第二次循环遍历 -->
     <view
     wx:for="{{list[current].children}}"
     wx:key="{{index}}"
     >
       <view class="brand-title">{{item.cat_name}}</view>
-          <!-- 品牌 -->
+      <!-- 品牌 -->
+      <!-- 第三次循环遍历 -->
       <view class="brands">
         <navigator
         url=""

@@ -1,2 +1,7 @@
 /**app.wxss**/
 @import "./common/style.wxss"; 
+
+page{
+  padding: 0;
+  margin:0;
+}

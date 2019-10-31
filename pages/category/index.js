@@ -20,7 +20,7 @@ Page({
      request({
        url:"/api/public/v1/categories"
      }).then(res =>{
-       console.log(res)
+      //  console.log(res)
        const {message} = res.data
        this.setData({
          list:message
