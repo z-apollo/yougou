@@ -50,6 +50,14 @@ Page({
     })
   },
 
+  handleClear(){
+    wx.removeStorageSync('search')
+
+    this.setData({
+      keywords:[]
+    })
+  },
+
   onShow(){
     //每次显示页面都从本地获取数据
     this.setData({
