@@ -27,6 +27,23 @@ Page({
       searchValue:"",
       showCancel:false
     })
+  },
+
+  //点击键盘右下角确定按钮时候触发
+  handleConfirm(){
+    //先从本地存储拿出来数组，没有的等于空的数组
+    const arr = wx.getStorageSync('search') || []
+
+    //判断本地是否有数据，有的话就在前面追加
+    arr.unshift(this.data.searchValue)
+
+    //保存到本地
+    wx.setStorageSync('search', arr)
+
+    //跳转到搜索列表页
+    wx.navigateTo({
+      url:"/pages/goods_list/index?query=" + this.data.searchValue
+    })
   }
 
 })

@@ -6,6 +6,7 @@
     placeholder="请输入您想要的商品" 
     bindinput="handleInput"
     value="{{searchValue}}"
+    bindconfirm="{{handleConfirm}}"
     >
     </input>
   </view>
