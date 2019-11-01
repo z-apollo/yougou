@@ -1,8 +1,12 @@
 // pages/search/index.js
 Page({
   data: {
+    //是否显示/取消按钮
     showCancel:false,
-    searchValue:""
+    //输入框的值
+    searchValue:"",
+    //搜索历史列表
+    keywords: []
   },
 
   onLoad: function (options) {
@@ -43,6 +47,13 @@ Page({
     //跳转到搜索列表页
     wx.navigateTo({
       url:"/pages/goods_list/index?query=" + this.data.searchValue
+    })
+  },
+
+  onShow(){
+    //每次显示页面都从本地获取数据
+    this.setData({
+      keywords: wx.getStorageSync("search") || []
     })
   }
 
