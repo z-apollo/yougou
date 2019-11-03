@@ -47,7 +47,6 @@ Page({
       number:number,
       selected: true
     }
-    console.log(goods,456)
     //保存到本地
     wx.setStorageSync("goods", goods)
   }
