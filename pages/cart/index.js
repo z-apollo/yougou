@@ -26,9 +26,33 @@ Page({
   onShow(){
     //每次打开页面的时候都在本地获取购物车的数据
     const goods = wx.getStorageSync("goods") || null
-    
+
     this.setData({
       goods
     })
+  },
+
+  //数量减1
+  handleReduce(){
+
+  },
+  //输入框输入数量
+  handleInput(){
+
+  },
+  //数量加1
+  handleAdd(event){
+    const {id} = event.target.dataset
+    const {goods} = this.data
+    //加1
+    goods[id].number += 1
+    //修改data的值
+    this.setData({
+      // goods:goods
+      goods
+    })
+  //保存到本地
+  wx.setStorageSync("goods", goods)
   }
+
 })
