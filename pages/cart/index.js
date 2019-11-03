@@ -1,5 +1,6 @@
-Page({
+import request from "../../utils/request.js"
 
+Page({
   data: {
     //收货地址
     address:{},
@@ -164,7 +165,7 @@ Page({
     })
   },
 
-  //全选状态
+  //判断全选状态
   handleAllSelected(){
     const {goods} = this.data
     let isSelect = true
@@ -197,6 +198,36 @@ Page({
     wx.setStorageSync("goods", goods)
     //计算总价格
     this.handleAllPrice()
+  },
+
+  //页面隐藏时候触发
+  onHide() {
+    // 页面离开时候统一保存到本，上面方法中wx.setStorageSync可以删除掉
+    // wx.setStorageSync("goods", goods);
+  },
+
+  handleSubmit() {
+    const { allPrice, address, goods } = this.data;
+
+    // 提取对象的value合并成数组
+    const goodsArr = Object.keys(goods).map(v => {
+      // 把数量赋值给goods_number，接口需要的
+      goods[v].goods_number = goods[v].number
+      return goods[v];
+    })
+
+    // 提交到订单
+    request({
+      url: "/api/public/v1/my/orders/create",
+      method: "POST",
+      data: {
+        order_price: allPrice,
+        consignee_addr: address.detail, // 一般情况地址是个对象，而不是一个字符串，接口问题
+        goods: goodsArr
+      }
+    }).then(res => {
+      console.log(res)
+    })
   }
 
 })
