@@ -67,9 +67,36 @@ Page({
       wx.setStorageSync("goods", goods)
     }
   },
-  //输入框输入数量
-  handleInput(){
+  //判断是否有小数点
+  bindinput(event) {
+    //获取输入框的值
+    const value = +event.detail.value
+    const{id} = event.target.dataset
+    const{goods} = this.data
+    //判断是否有小数点
+    goods[id].number = Math.floor(value)
 
+    //修改data的值
+    this.setData({
+      goods
+    })
+  },
+  //输入框输入数量
+  bindchange(event){
+    //获取输入框的值
+    const value = +event.detail.value
+    const {id} = event.target.dataset
+    const {goods} = this.data
+
+    //如果是空的或者是0
+    goods[id].number = value === 0 ? 1 : value
+
+    //修改data的值
+    this.setData({
+      goods
+    })
+    //保存到本地
+    wx.setStorageSync("goods", goods)
   },
   //数量加1
   handleAdd(event){
